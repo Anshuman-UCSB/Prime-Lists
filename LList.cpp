@@ -81,26 +81,20 @@ int main(){
 
     printList(head);
 
-    int sizePrimes = 21;
-
+    int sizePrimes = 1000;
 
     bool prime;
     node* last;
     
     for(int i = 3;i<sizePrimes;i++){
-
         if(i%6!=1 && i%6!=5){
             continue;
         }
-
         prime = true;
         last = head;
 
-        cout<<"i: "<<i<<" - ";
-
+        //cout<<"i: "<<i<<" - ";
         while(last->data<=pow(i,0.5)){
-            
-
             if(i%last->data==0){
                 cout<<"Not prime, "<<i<<" is divisible by "<<last->data<<"."<<endl;
                 prime = false;
@@ -109,7 +103,6 @@ int main(){
             if(last->next==0){
                 break;
             }
-
             last = nextNode(last);
         }
         if(prime){
@@ -117,8 +110,6 @@ int main(){
             appendNode(last, i);
         }
     }
-
     printPretty(head);
-
     cout<<"---DEBUG MAIN FINISHED---"<<endl;
 }
