@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <cmath>
 
 using namespace std;
 
@@ -31,6 +32,17 @@ void addNode(node* prior, int val){
     prior->next=n;
 }
 
+void appendNode(node* any, int val){
+    while(any->next!=0){
+        any = nextNode(any);
+    }
+    node* n = new node;
+    n->data = val;
+    n->next = 0;
+    
+    any->next=n;
+}
+
 void removeNode(node* prior){
     node* pop = prior->next;
     prior->next=pop->next;
@@ -51,14 +63,62 @@ void printList(node* head){
     cout<<"]"<<endl;
 }
 
+void printPretty(node* head){
+    cout<<head->data;
+    head = nextNode(head);
+    for(node* p = head;p!=0;p=nextNode(p)){
+        cout<<", "<<p->data;
+    }
+    cout<<endl;
+}
+
 
 int main(){
     cout<<"---DEBUG MAIN---"<<endl;
 
     node* head;
     head = makeHead(2);
-    addNode(head,3);
+
     printList(head);
+
+    int sizePrimes = 21;
+
+
+    bool prime;
+    node* last;
+    
+    for(int i = 3;i<sizePrimes;i++){
+
+        if(i%6!=1 && i%6!=5){
+            continue;
+        }
+
+        prime = true;
+        last = head;
+
+        cout<<"i: "<<i<<" - ";
+
+        while(last->data<=pow(i,0.5)){
+            
+
+            if(i%last->data==0){
+                cout<<"Not prime, "<<i<<" is divisible by "<<last->data<<"."<<endl;
+                prime = false;
+                break;
+            }
+            if(last->next==0){
+                break;
+            }
+
+            last = nextNode(last);
+        }
+        if(prime){
+            cout<<"Prime, "<<i<<" is not divisible by any prior prime.\n";
+            appendNode(last, i);
+        }
+    }
+
+    printPretty(head);
 
     cout<<"---DEBUG MAIN FINISHED---"<<endl;
 }
