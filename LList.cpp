@@ -79,9 +79,11 @@ int main(){
     node* head;
     head = makeHead(2);
 
-    printList(head);
+    //printList(head);
 
     int sizePrimes = 1000;
+    cout<<"Up to what number to test for primes: ";
+    cin>>sizePrimes;
 
     bool prime;
     node* last;
@@ -96,7 +98,7 @@ int main(){
         //cout<<"i: "<<i<<" - ";
         while(last->data<=pow(i,0.5)){
             if(i%last->data==0){
-                cout<<"Not prime, "<<i<<" is divisible by "<<last->data<<"."<<endl;
+                //cout<<"Not prime, "<<i<<" is divisible by "<<last->data<<"."<<endl;
                 prime = false;
                 break;
             }
@@ -106,7 +108,7 @@ int main(){
             last = nextNode(last);
         }
         if(prime){
-            cout<<"Prime, "<<i<<" is not divisible by any prior prime.\n";
+            //cout<<"Prime, "<<i<<" is not divisible by any prior prime.\n";
             appendNode(last, i);
         }
     }
