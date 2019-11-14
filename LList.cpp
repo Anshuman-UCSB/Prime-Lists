@@ -72,14 +72,20 @@ void printPretty(node* head){
     cout<<endl;
 }
 
+int sizeList(node* head){
+    node* p = head;
+    int i;
+    for(i = 0;p!=0;i++){
+        p=nextNode(p);
+    }
+    return i;
+}
 
 int main(){
     cout<<"---DEBUG MAIN---"<<endl;
 
     node* head;
     head = makeHead(2);
-
-    //printList(head);
 
     int sizePrimes = 1000;
     cout<<"Up to what number to test for primes: ";
@@ -95,10 +101,8 @@ int main(){
         prime = true;
         last = head;
 
-        //cout<<"i: "<<i<<" - ";
         while(last->data<=pow(i,0.5)){
             if(i%last->data==0){
-                //cout<<"Not prime, "<<i<<" is divisible by "<<last->data<<"."<<endl;
                 prime = false;
                 break;
             }
@@ -108,10 +112,10 @@ int main(){
             last = nextNode(last);
         }
         if(prime){
-            //cout<<"Prime, "<<i<<" is not divisible by any prior prime.\n";
             appendNode(last, i);
         }
     }
     printPretty(head);
+    cout<<"Solved for "<<sizeList(head)<<" primes."<<endl;
     cout<<"---DEBUG MAIN FINISHED---"<<endl;
 }
